@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FFXI AutoLogin GUI Mockup</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #1a1a1a;
+            color: #cccccc;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .mockup-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .mockup-title {
+            text-align: center;
+            color: #007acc;
+            font-size: 24px;
+            margin-bottom: 30px;
+            font-weight: bold;
+        }
+
+        .windows-container {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* Main Window Styles */
+        .main-window {
+            background: #2d2d30;
+            border: 1px solid #404040;
+            border-radius: 8px;
+            width: 600px;
+            height: 500px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .title-bar {
+            background: #3e3e42;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            padding: 0 12px;
+            border-bottom: 1px solid #404040;
+        }
+
+        .window-controls {
+            display: flex;
+            gap: 8px;
+        }
+
+        .control-btn {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .close { background: #f44747; }
+        .minimize { background: #ffcc02; }
+        .maximize { background: #4ec9b0; }
+
+        .window-title {
+            flex: 1;
+            text-align: center;
+            font-size: 14px;
+            color: #cccccc;
+        }
+
+        .window-content {
+            padding: 20px;
+            height: calc(100% - 32px);
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Button Styles */
+        .btn {
+            background: #333337;
+            border: 1px solid #404040;
+            color: #cccccc;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 14px;
+            transition: all 0.2s ease;
+        }
+
+        .btn:hover {
+            background: #46464a;
+            border-color: #5a5a5a;
+        }
+
+        .btn-primary {
+            background: #007acc;
+            border-color: #007acc;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #1e88e5;
+            border-color: #1e88e5;
+        }
+
+        .setup-btn {
+            width: 150px;
+            height: 32px;
+            margin-bottom: 20px;
+        }
+
+        /* Character Cards */
+        .characters-section h3 {
+            color: #cccccc;
+            font-size: 16px;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .character-card {
+            background: #333337;
+            border: 1px solid #404040;
+            border-radius: 6px;
+            padding: 12px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .character-card:hover {
+            background: #46464a;
+            border-color: #5a5a5a;
+        }
+
+        .character-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #4ec9b0;
+        }
+
+        .character-details h4 {
+            color: #cccccc;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 2px;
+        }
+
+        .character-details p {
+            color: #999999;
+            font-size: 12px;
+        }
+
+        .launch-btn {
+            width: 80px;
+            height: 28px;
+            font-size: 12px;
+        }
+
+        /* Bottom Buttons */
+        .bottom-buttons {
+            margin-top: auto;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Setup Dialog Styles */
+        .setup-dialog {
+            background: #2d2d30;
+            border: 1px solid #404040;
+            border-radius: 8px;
+            width: 450px;
+            height: 400px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            color: #cccccc;
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .form-input {
+            width: 200px;
+            height: 28px;
+            background: #333337;
+            border: 1px solid #404040;
+            border-radius: 4px;
+            color: #cccccc;
+            padding: 0 8px;
+            font-family: inherit;
+            font-size: 14px;
+            transition: border-color 0.2s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #007acc;
+            box-shadow: 0 0 0 2px rgba(0, 122, 204, 0.2);
+        }
+
+        .form-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .form-row label {
+            width: 120px;
+            margin-bottom: 0;
+        }
+
+        .dropdown {
+            width: 100px;
+            height: 28px;
+            background: #333337;
+            border: 1px solid #404040;
+            border-radius: 4px;
+            color: #cccccc;
+            padding: 0 8px;
+            font-family: inherit;
+            font-size: 14px;
+        }
+
+        .add-btn {
+            width: 120px;
+            height: 32px;
+            margin-top: 20px;
+            margin-left: 132px;
+        }
+
+        .empty-state {
+            text-align: center;
+            color: #999999;
+            font-style: italic;
+            margin-top: 40px;
+        }
+
+        .demo-note {
+            background: #3e3e42;
+            border: 1px solid #404040;
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .demo-note h4 {
+            color: #007acc;
+            margin-bottom: 8px;
+        }
+
+        .demo-note p {
+            color: #999999;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="mockup-container">
+        <h1 class="mockup-title">FFXI AutoLogin - Modern GUI Mockup</h1>
+        
+        <div class="demo-note">
+            <h4>Interactive Preview</h4>
+            <p>This shows exactly how the GUI will look with the modern dark theme. Hover over elements to see interactions!</p>
+        </div>
+
+        <div class="windows-container">
+            <!-- Main Window -->
+            <div class="main-window">
+                <div class="title-bar">
+                    <div class="window-controls">
+                        <div class="control-btn close"></div>
+                        <div class="control-btn minimize"></div>
+                        <div class="control-btn maximize"></div>
+                    </div>
+                    <div class="window-title">FFXI AutoLogin</div>
+                </div>
+                
+                <div class="window-content">
+                    <button class="btn btn-primary setup-btn">Setup Characters</button>
+                    
+                    <div class="characters-section">
+                        <h3>Saved Characters</h3>
+                        
+                        <div class="character-card">
+                            <div class="character-info">
+                                <div class="status-dot"></div>
+                                <div class="character-details">
+                                    <h4>MyPaladin</h4>
+                                    <p>Slot 1</p>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary launch-btn">Launch</button>
+                        </div>
+                        
+                        <div class="character-card">
+                            <div class="character-info">
+                                <div class="status-dot"></div>
+                                <div class="character-details">
+                                    <h4>DarkKnight</h4>
+                                    <p>Slot 2</p>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary launch-btn">Launch</button>
+                        </div>
+                        
+                        <div class="character-card">
+                            <div class="character-info">
+                                <div class="status-dot"></div>
+                                <div class="character-details">
+                                    <h4>WhiteMage</h4>
+                                    <p>Slot 3</p>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary launch-btn">Launch</button>
+                        </div>
+                    </div>
+                    
+                    <div class="bottom-buttons">
+                        <button class="btn">Settings</button>
+                        <button class="btn">About</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Setup Dialog -->
+            <div class="setup-dialog">
+                <div class="title-bar">
+                    <div class="window-controls">
+                        <div class="control-btn close"></div>
+                        <div class="control-btn minimize"></div>
+                        <div class="control-btn maximize"></div>
+                    </div>
+                    <div class="window-title">Setup Characters</div>
+                </div>
+                
+                <div class="window-content">
+                    <h3 style="margin-bottom: 20px; color: #cccccc;">Add New Character</h3>
+                    
+                    <div class="form-group">
+                        <div class="form-row">
+                            <label>Character Name:</label>
+                            <input type="text" class="form-input" placeholder="MyCharacter">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <div class="form-row">
+                            <label>Password:</label>
+                            <input type="password" class="form-input" placeholder="••••••••••••">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <div class="form-row">
+                            <label>TOTP Secret:</label>
+                            <input type="text" class="form-input" placeholder="Optional">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <div class="form-row">
+                            <label>Character Slot:</label>
+                            <select class="dropdown">
+                                <option>Slot 1</option>
+                                <option>Slot 2</option>
+                                <option>Slot 3</option>
+                                <option>Slot 4</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <div class="form-row">
+                            <label>Windower Args:</label>
+                            <input type="text" class="form-input" placeholder="Optional">
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-primary add-btn">Add Character</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Empty State Example -->
+        <div style="margin-top: 30px;">
+            <h3 style="color: #007acc; text-align: center; margin-bottom: 15px;">Empty State (No Characters)</h3>
+            <div class="main-window" style="margin: 0 auto;">
+                <div class="title-bar">
+                    <div class="window-controls">
+                        <div class="control-btn close"></div>
+                        <div class="control-btn minimize"></div>
+                        <div class="control-btn maximize"></div>
+                    </div>
+                    <div class="window-title">FFXI AutoLogin</div>
+                </div>
+                
+                <div class="window-content">
+                    <button class="btn btn-primary setup-btn">Setup Characters</button>
+                    
+                    <div class="characters-section">
+                        <h3>Saved Characters</h3>
+                        <div class="empty-state">
+                            <p>No characters configured. Click 'Setup Characters' to add some.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="bottom-buttons">
+                        <button class="btn">Settings</button>
+                        <button class="btn">About</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add some interactive behavior
+        document.querySelectorAll('.character-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const characterName = this.querySelector('h4').textContent;
+                alert(`Would launch character: ${characterName}`);
+            });
+        });
+
+        document.querySelector('.setup-btn').addEventListener('click', function() {
+            alert('Setup Characters dialog would open');
+        });
+
+        document.querySelectorAll('.launch-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const characterName = this.closest('.character-card').querySelector('h4').textContent;
+                alert(`Launching ${characterName}...`);
+            });
+        });
+
+        document.querySelector('.add-btn').addEventListener('click', function() {
+            alert('Character would be added to the list');
+        });
+    </script>
+</body>
+</html>
